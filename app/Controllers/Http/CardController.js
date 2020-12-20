@@ -4,6 +4,7 @@
 // const HistoryModel = use('App/Models/History')
 const CarModel = use('App/Models/Car')
 const RouteModel = use('App/Models/HouseRoute')
+const Route = use('App/Models/Route')
 
 // const makeHouseUtil = require('../../../utils/houseUtils.func')
 // const makeHistoryUtil = require('../../../utils/historyUtils.func')
@@ -53,7 +54,7 @@ class CardController {
 
       const promises = routes
         .toJSON()
-        .map(route => makeRouteUtil(RouteModel).updateByID(route.bulb_id, { status: true }))
+        .map(route => makeRouteUtil(Route).updateByID(route.bulb_id, { status: true }))
 
       await Promise.all(promises)
 

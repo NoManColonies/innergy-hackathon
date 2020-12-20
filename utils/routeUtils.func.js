@@ -17,7 +17,7 @@ module.exports = RouteModel => {
     getById: (bulb_id, references) => withReferences(references).where({ bulb_id }).first(),
     create: attributes => RouteModel.create(attributes),
     updateByID: async (bulb_id, attributes, references) => {
-      const house = await RouteModel.find(bulb_id)
+      const house = await RouteModel.findBy({ bulb_id })
 
       house.merge(attributes)
 
