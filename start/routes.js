@@ -26,4 +26,5 @@ Route.group(() => {
   Route.get('/download/:id', 'ImageController.downloadImage')
   Route.post('/upload/:id', 'ImageController.uploadImage')
   Route.post('/scan', 'CardController.scan')
+  Route.post('/scanID', 'CardController.scanCardID')
 }).prefix('api/v1')

@@ -21,7 +21,7 @@ class House extends Model {
   }
 
   cars () {
-    return this.hasMany('App/Models/Car', 'house_id', 'house_id')
+    return this.hasOne('App/Models/Car', 'house_id', 'house_id')
   }
 
   routes () {

@@ -37,11 +37,10 @@ class CardController {
 
   async scanCardID ({ request, response }) {
     const { body } = request
-    const { card_id, car_id } = body
+    const { card_id } = body
 
-    const car = await HouseModel.query()
-      .where({ card_id })
-      .with('cars', builder => builder.where({ car_id }))
+    const car = await CarModel.query()
+      .with('owner', builder => builder.where({ card_id }))
       .first()
 
     if (car) {
@@ -52,6 +51,7 @@ class CardController {
         uuid: timestamp.uuid,
         routes: await RouteModel.query()
           .where({ house_id: car.toJSON().owner.house_id })
+          .setHidden(['uuid'])
           .fetch(),
         durations: 30000
       })
