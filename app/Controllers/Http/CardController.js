@@ -1,6 +1,6 @@
 'use strict'
 
-const HouseModel = use('App/Models/House')
+// const HouseModel = use('App/Models/House')
 // const HistoryModel = use('App/Models/History')
 const CarModel = use('App/Models/Car')
 const RouteModel = use('App/Models/HouseRoute')
@@ -8,7 +8,7 @@ const RouteModel = use('App/Models/HouseRoute')
 // const makeHouseUtil = require('../../../utils/houseUtils.func')
 // const makeHistoryUtil = require('../../../utils/historyUtils.func')
 const makeCarUtil = require('../../../utils/carUtils.func')
-// const makeRouteUtil = require('../../../utils/routeUtils.func')
+const makeRouteUtil = require('../../../utils/routeUtils.func')
 
 class CardController {
   async scan ({ request, response }) {
@@ -46,13 +46,21 @@ class CardController {
     if (car) {
       const timestamp = await car.timestamps().create({})
 
+      const routes = await RouteModel.query()
+        .where({ house_id: car.toJSON().owner.house_id })
+        .setHidden(['uuid'])
+        .fetch()
+
+      const promises = routes
+        .toJSON()
+        .map(route => makeRouteUtil(RouteModel).updateByID(route.bulb_id, { status: true }))
+
+      await Promise.all(promises)
+
       return response.status(201).send({
         status: 'success',
         uuid: timestamp.uuid,
-        routes: await RouteModel.query()
-          .where({ house_id: car.toJSON().owner.house_id })
-          .setHidden(['uuid'])
-          .fetch(),
+        routes,
         durations: 30000
       })
     }
