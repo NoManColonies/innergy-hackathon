@@ -1,28 +1,88 @@
-# Adonis API application
+# url: /api/v1/house
 
-This is the boilerplate for creating an API server in AdonisJs, it comes pre-configured with.
+## method: get
 
-1. Bodyparser
-2. Authentication
-3. CORS
-4. Lucid ORM
-5. Migrations and seeds
+return all houses
 
-## Setup
+# url: /api/v1/house/{id}
 
-Use the adonis command to install the blueprint
+## method: get
 
-```bash
-adonis new yardstick --api-only
+return house by id
+
+# url: /api/v1/house
+
+## method: post
+
+### body example
+```json
+{
+  "card_id": "A001",
+  "house_id": "11/01",
+  "owner": "A",
+  "routes": [
+     "01A", "01B"
+  ]
+}
 ```
 
-or manually clone the repo and then run `npm install`.
+# url: /api/v1/car
 
+## method: get
 
-### Migrations
+return all cars
 
-Run the following command to run startup migrations.
+# url: /api/v1/car/{id}
 
-```js
-adonis migration:run
+## method: get
+
+return car by id
+
+# url: /api/v1/car
+
+## method: post
+
+### body example
+```json
+{
+    "house_id": "11/01",
+    "car_id": "89"
+}
 ```
+
+
+# url: /api/v1/history
+
+## method: get
+
+return all histories
+
+# url: /api/v1/history/{id}
+
+## method: get
+
+return history by id
+
+# url: /api/v1/scan
+
+## method: post
+
+### body example
+```json
+{
+    "car_id": "89"
+}
+```
+
+# url: /api/v1/upload/{id}
+
+## method: post
+
+### body
+```
+image: _FILE_
+```
+
+# url: /api/v1/download/{id}
+
+## method: get
