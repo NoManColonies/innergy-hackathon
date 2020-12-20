@@ -7,6 +7,7 @@ class RouteSchema extends Schema {
   up () {
     this.create('routes', table => {
       table.string('bulb_id').unique()
+      table.boolean('status').default(false).notNullable()
     })
   }
 

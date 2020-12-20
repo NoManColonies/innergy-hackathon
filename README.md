@@ -113,3 +113,14 @@ return route by id
   "id": "01A"
 }
 ```
+
+# url: /api/v1/route/{id}
+
+## method: put
+
+### body example
+```json
+{
+  "status": true
+}
+```

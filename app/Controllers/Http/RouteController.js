@@ -45,6 +45,24 @@ class RouteController {
       data: bulb
     })
   }
+
+  async update ({ request, response }) {
+    const { params, qs, body } = request
+    const { references } = qs
+    const { id } = params
+    const { status = false } = body
+
+    const bulb = await makeRouteUtil(RouteModel).updateByID(
+      id,
+      { status },
+      references
+    )
+
+    return response.status(200).send({
+      status: 'success',
+      data: bulb
+    })
+  }
 }
 
 module.exports = RouteController
