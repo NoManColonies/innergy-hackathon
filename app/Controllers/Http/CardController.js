@@ -1,6 +1,6 @@
 'use strict'
 
-// const HouseModel = use('App/Models/House')
+const HouseModel = use('App/Models/House')
 // const HistoryModel = use('App/Models/History')
 const CarModel = use('App/Models/Car')
 const RouteModel = use('App/Models/HouseRoute')
@@ -62,13 +62,19 @@ class CardController {
     const { body } = request
     const { card_id } = body
 
-    const car = await CarModel.query()
-      .with('owner', builder => builder.where({ card_id }))
+    // const car = await CarModel.query()
+    //   .with('owner', builder => builder.where({ card_id }))
+    //   .fetch()
+    const car = await HouseModel.query()
+      .where({ card_id })
+      .with('cars.owner')
       .first()
+      .then(query => query.getRelated('cars'))
 
     if (car) {
       const timestamp = await car.timestamps().create({})
 
+      console.log(car.toJSON())
       const routes = await RouteModel.query()
         .where({ house_id: car.toJSON().owner.house_id })
         .setHidden(['uuid'])
