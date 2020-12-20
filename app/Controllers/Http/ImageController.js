@@ -19,7 +19,7 @@ class ImageController {
 
     try {
       request.multipart.file(
-        'credential_image',
+        'image',
         { types: ['image'], size: '2mb', extnames: ['png', 'jpg', 'jpeg'] },
         async file => {
           await Drive.disk('s3').put(`cars/${id}.${file.extname}`, file.stream)

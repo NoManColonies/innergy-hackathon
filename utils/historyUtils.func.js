@@ -13,7 +13,7 @@ module.exports = HistoryModel => {
 
   return {
     // eslint-disable-next-line
-    getAll: (references, perPage = 1, onPage = 10) => withReferences(references).paginate(onPage, perPage),
+    getAll: (references, perPage = 10, onPage = 1) => withReferences(references).paginate(onPage, perPage),
     getById: (uuid, references) => withReferences(references).where({ uuid }).first(),
     create: attributes => HistoryModel.create(attributes),
     updateByID: async (uuid, attributes, references) => {

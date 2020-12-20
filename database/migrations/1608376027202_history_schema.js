@@ -9,7 +9,7 @@ class HistorySchema extends Schema {
       table.uuid('uuid').unique()
       table.string('car_id').notNullable()
       table.string('type').default('arrive').notNullable()
-      table.timestamps()
+      table.timestamp('timestamp')
 
       table
         .foreign('car_id')

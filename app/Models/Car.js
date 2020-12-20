@@ -21,7 +21,7 @@ class Car extends Model {
   }
 
   timestamps () {
-    return this.hasMany('App/Models/Car', 'car_id', 'car_id')
+    return this.hasMany('App/Models/History', 'car_id', 'car_id')
   }
 
   owner () {

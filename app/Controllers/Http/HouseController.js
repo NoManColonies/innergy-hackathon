@@ -1,8 +1,10 @@
 'use strict'
 
 const makeHouseUtil = require('../../../utils/houseUtils.func')
+const makeRouteUtil = require('../../../utils/routeUtils.func')
 
 const HouseModel = use('App/Models/House')
+const RouteModel = use('App/Models/Route')
 
 class HouseController {
   async index ({ request, response }) {
@@ -38,9 +40,19 @@ class HouseController {
   async store ({ request, response }) {
     const { body } = request
 
-    const { house_id, owner } = body
+    const { house_id, owner, routes, card_id } = body
 
-    const house = await makeHouseUtil(HouseModel).create({ house_id, owner })
+    const house = await makeHouseUtil(HouseModel).create({
+      house_id,
+      owner,
+      card_id
+    })
+
+    const promises = routes.map(route => makeRouteUtil(RouteModel).getById(route))
+
+    const routeEntities = await Promise.all(promises)
+
+    await house.routes().attach(routeEntities.map(route => route.bulb_id))
 
     return response.status(201).send({
       status: 'success',

@@ -3,9 +3,9 @@
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model')
 
-class House extends Model {
+class Route extends Model {
   static get table () {
-    return 'houses'
+    return 'routes'
   }
 
   static get incrementing () {
@@ -13,26 +13,26 @@ class House extends Model {
   }
 
   static get primaryKey () {
-    return 'house_id'
+    return 'bulb_id'
+  }
+
+  static get createdAtColumn () {
+    return null
   }
 
   static get updatedAtColumn () {
     return null
   }
 
-  cars () {
-    return this.hasMany('App/Models/Car', 'house_id', 'house_id')
-  }
-
-  routes () {
+  houses () {
     return this.belongsToMany(
-      'App/Models/Route',
-      'house_id',
+      'App/Models/House',
       'bulb_id',
       'house_id',
-      'bulb_id'
+      'bulb_id',
+      'house_id'
     ).pivotModel('App/Models/HouseRoute')
   }
 }
 
-module.exports = House
+module.exports = Route

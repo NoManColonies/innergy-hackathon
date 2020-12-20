@@ -13,7 +13,7 @@ module.exports = HouseModel => {
 
   return {
     // eslint-disable-next-line
-    getAll: (references, perPage = 1, onPage = 10) => withReferences(references).paginate(onPage, perPage),
+    getAll: (references, perPage = 10, onPage = 1) => withReferences(references).paginate(onPage, perPage),
     getById: (house_id, references) => withReferences(references).where({ house_id }).first(),
     create: attributes => HouseModel.create(attributes),
     updateByID: async (house_id, attributes, references) => {

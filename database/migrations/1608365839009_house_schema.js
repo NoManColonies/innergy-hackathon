@@ -7,6 +7,7 @@ class HouseSchema extends Schema {
   up () {
     this.create('houses', table => {
       table.string('house_id').unique()
+      table.string('card_id').notNullable().unique()
       table.string('owner').notNullable()
       table.timestamps()
     })

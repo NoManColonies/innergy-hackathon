@@ -22,6 +22,8 @@ Route.group(() => {
   Route.resource('/house', 'HouseController')
   Route.resource('/car', 'CarController')
   Route.resource('/history', 'HistoryController')
+  Route.resource('/route', 'RouteController')
   Route.get('/download/:id', 'ImageController.downloadImage')
   Route.post('/upload/:id', 'ImageController.uploadImage')
+  Route.post('/scan', 'CardController.scan')
 }).prefix('api/v1')

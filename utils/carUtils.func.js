@@ -13,7 +13,7 @@ module.exports = CarModel => {
 
   return {
     // eslint-disable-next-line
-    getAll: (references, perPage = 1, onPage = 10) => withReferences(references).paginate(onPage, perPage),
+    getAll: (references, perPage = 10, onPage = 1) => withReferences(references).paginate(onPage, perPage),
     getById: (car_id, references) => withReferences(references).where({ car_id }).first(),
     create: attributes => CarModel.create(attributes),
     updateByID: async (car_id, attributes, references) => {
