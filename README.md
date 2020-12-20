@@ -78,6 +78,8 @@ return history by id
 
 ## method: post
 
+upload image
+
 ### body
 ```
 image: _FILE_
@@ -86,3 +88,28 @@ image: _FILE_
 # url: /api/v1/download/{id}
 
 ## method: get
+
+return image url
+
+# url: /api/v1/route
+
+## method: get
+
+return all routes
+
+# url: /api/v1/route/{id}
+
+## method: get
+
+return route by id
+
+# url: /api/v1/route
+
+## method: post
+
+### body example
+```json
+{
+  "id": "01A"
+}
+```
